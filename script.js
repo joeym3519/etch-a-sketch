@@ -3,22 +3,37 @@ const container = document.querySelector('.container')
 const amtOfGrids = 6
 
 const createGrid = (amtOfGrids) => {
-  for (let i = 0; i < amtOfGrids; i++){
-    const row = document.createElement('div')
-    row.classList.add('grid-row')
+    const wrapper = document.createElement('div')
+    wrapper.classList.add('wrapper')
 
-    for (let j = 0; j < amtOfGrids; j++) {
-        const gridBox = document.createElement('div')
-        gridBox.classList.add('grid-box')
-        // paint box as you move over it
-        gridBox.addEventListener('mouseenter' , () => {
-            gridBox.style.backgroundColor = 'black'
-        })
-        row.appendChild(gridBox)
+    for (let i = 0; i < amtOfGrids; i++){
+        const row = document.createElement('div')
+        row.classList.add('grid-row')
+
+        for (let j = 0; j < amtOfGrids; j++) {
+            const gridBox = document.createElement('div')
+            gridBox.classList.add('grid-box')
+            gridBox.addEventListener('mouseenter' , () => {
+                gridBox.style.backgroundColor = '#272343'
+            })
+            row.appendChild(gridBox)
     }
-    container.appendChild(row)
+    wrapper.appendChild(row)
   }
+  container.appendChild(wrapper)
 }
+
+resetButton.addEventListener('click', () => {
+    let userSize = Number(prompt('What dimensions would you like for your new grid?'))
+
+    while (userSize > 100){
+        userSize = Number(prompt('Less than 100 please'))
+    }
+    const wrapper = document.querySelector('.wrapper')
+    wrapper.remove()
+    createGrid(userSize) 
+}) 
+
 
 createGrid(amtOfGrids)
 
