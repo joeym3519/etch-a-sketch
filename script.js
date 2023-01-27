@@ -2,11 +2,22 @@ const resetButton = document.querySelector('button')
 const container = document.querySelector('.container')
 const amtOfGrids = 6
 
+const createRandomRGB = () => {
+    const r = Math.floor(Math.random() * 256)
+    const g = Math.floor(Math.random() * 256)
+    const b = Math.floor(Math.random() * 256)
+
+    return { r, g, b}
+
+}
+
+// what is called when we create grid (i.e. how to create grid)
 const createGrid = (amtOfGrids) => {
     const wrapper = document.createElement('div')
     wrapper.classList.add('wrapper')
 
     for (let i = 0; i < amtOfGrids; i++){
+        const { r, g, b } = createRandomRGB()
         const row = document.createElement('div')
         row.classList.add('grid-row')
 
@@ -14,7 +25,8 @@ const createGrid = (amtOfGrids) => {
             const gridBox = document.createElement('div')
             gridBox.classList.add('grid-box')
             gridBox.addEventListener('mouseenter' , () => {
-                gridBox.style.backgroundColor = '#272343'
+                const bgColor = "rgb(" + r + "," + g + "," + b + ")";
+                gridBox.style.backgroundColor = bgColor
             })
             row.appendChild(gridBox)
     }
@@ -22,6 +34,7 @@ const createGrid = (amtOfGrids) => {
   }
   container.appendChild(wrapper)
 }
+// button prompt
 
 resetButton.addEventListener('click', () => {
     let userSize = Number(prompt('What dimensions would you like for your new grid?'))
@@ -33,33 +46,5 @@ resetButton.addEventListener('click', () => {
     wrapper.remove()
     createGrid(userSize) 
 }) 
-
-
+// to create the grid
 createGrid(amtOfGrids)
-
-
-
-
-
-
-
-
-// let container = document.getElementById('container') 
-
-
-// for(i = 0; i <16; i++) {
-//     let div = document.createElement('div');
-//         div.classList.add("cell");
-//         container.appendChild(div);
-// }
-
-
-
-// let cells = document.querySelector('#container');
-// let paintBrush = document.querySelector('.cell')
-
-// cells.addEventListener('click', paintCell);
-// function paintCell(){
-//         paintBrush.style.backgroundColor = 'black';
-
-//         }
